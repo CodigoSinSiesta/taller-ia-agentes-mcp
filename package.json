@@ -1,0 +1,32 @@
+{
+  "name": "taller-ia-agentes-mcp",
+  "version": "1.0.0",
+  "description": "Ejemplos de Agentes IA y MCP Servers - Compatible con Claude y DeepSeek",
+  "type": "module",
+  "scripts": {
+    "agente:tareas": "tsx agentes/agente-tareas/index.ts",
+    "agente:tareas:claude": "LLM_PROVIDER=claude tsx agentes/agente-tareas/index.ts",
+    "agente:tareas:deepseek": "LLM_PROVIDER=deepseek tsx agentes/agente-tareas/index.ts",
+    "agente:investigador": "tsx agentes/agente-investigador/index.ts",
+    "agente:investigador:claude": "LLM_PROVIDER=claude tsx agentes/agente-investigador/index.ts",
+    "agente:investigador:deepseek": "LLM_PROVIDER=deepseek tsx agentes/agente-investigador/index.ts",
+    "mcp:notas": "tsx mcp-servers/notas-mcp.ts",
+    "mcp:utils": "tsx mcp-servers/utils-mcp.ts"
+  },
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.52.0",
+    "@modelcontextprotocol/sdk": "^1.12.0",
+    "dotenv": "^17.2.3",
+    "fastmcp": "^1.20.5",
+    "openai": "^4.77.0",
+    "zod": "^3.24.0"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.5.0"
+  },
+  "engines": {
+    "node": ">=20.0.0"
+  }
+}
