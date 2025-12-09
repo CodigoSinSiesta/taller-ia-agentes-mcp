@@ -1,0 +1,70 @@
+{
+  "name": "Taller IA: Agentes y MCP Servers",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  "containerEnv": {
+    "LANG": "es_ES.UTF-8",
+    "LC_ALL": "es_ES.UTF-8",
+    "LC_CTYPE": "es_ES.UTF-8"
+  },
+
+  "remoteEnv": {
+    "LLM_PROVIDER": "claude"
+  },
+
+  "postCreateCommand": "npm install && npm run build 2>/dev/null || true && echo '✅ DevContainer ready!'",
+
+  "postStartCommand": "echo 'Welcome to Taller IA DevContainer - Agentes y MCP Servers'",
+
+  "forwardPorts": [],
+
+  "portsAttributes": {},
+
+  "mounts": [
+    "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,readonly",
+    "source=${localEnv:HOME}/.gitconfig,target=/home/node/.gitconfig,readonly"
+  ],
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "GitHub.Copilot"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "typescript.enablePromptUseWorkspaceTsdk": true,
+        "terminal.integrated.env.linux": {
+          "LANG": "es_ES.UTF-8"
+        },
+        "terminal.integrated.env.osx": {
+          "LANG": "es_ES.UTF-8"
+        },
+        "terminal.integrated.env.windows": {
+          "LANG": "es_ES.UTF-8"
+        }
+      }
+    }
+  },
+
+  "remoteUser": "node",
+  "updateRemoteUserUID": false,
+
+  "workspaceFolder": "/workspaces/taller-ia"
+}

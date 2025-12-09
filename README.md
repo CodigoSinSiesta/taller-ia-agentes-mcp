@@ -2,7 +2,59 @@
 
 Ejemplos prácticos para entender cómo funcionan los **Agentes de IA** y los **MCP Servers** (Model Context Protocol).
 
-✅ **Compatible con Claude y DeepSeek**
+✅ **Compatible con Claude y DeepSeek**  
+✅ **DevContainer Incluido** - Entorno preconfigurado en Docker
+
+---
+
+## 🐳 Inicio Rápido con DevContainer (Recomendado)
+
+### Prerequisitos Mínimos
+- **Docker Desktop** instalado ([descargar](https://www.docker.com/products/docker-desktop))
+- **VS Code** instalado ([descargar](https://code.visualstudio.com/))
+- **Extensión Dev Containers** (instala desde VS Code)
+
+### Setup (5 minutos)
+
+```bash
+# 1. Clonar repositorio
+git clone https://github.com/[usuario]/taller-ia.git
+cd taller-ia
+
+# 2. Abrir en VS Code
+code .
+
+# 3. VS Code sugerirá abrir en DevContainer → Haz clic en "Reopen in Container"
+# Las dependencias se instalarán automáticamente
+
+# 4. Configurar API keys (crear archivo .env en raíz)
+cp .env.example .env
+# Edita .env con tus claves de Anthropic y/o DeepSeek
+
+# 5. ¡Listo! Prueba un agente
+npm run agente:tareas:claude
+```
+
+📖 **Documentación completa**: Ver [`specs/001-devcontainer-setup/quickstart.md`](./specs/001-devcontainer-setup/quickstart.md)
+
+---
+
+## 📦 Instalación Manual (sin DevContainer)
+
+Si prefieres NO usar DevContainer:
+
+```bash
+# Requisitos: Node.js 20+, npm 10+
+node --version    # v20.x.x mínimo
+npm --version     # 10.x.x mínimo
+
+# Instalar dependencias
+npm install
+
+# Configurar variables de entorno
+cp .env.example .env
+# Edita .env con tus API keys
+```
 
 ---
 
@@ -10,6 +62,11 @@ Ejemplos prácticos para entender cómo funcionan los **Agentes de IA** y los **
 
 ```
 taller-ia/
+├── .devcontainer/
+│   └── devcontainer.json          # Configuración del DevContainer
+├── .vscode/
+│   ├── settings.json              # Configuración de VS Code
+│   └── extensions.json            # Extensiones recomendadas
 ├── agentes/
 │   ├── shared/
 │   │   └── llm-client.ts          # Cliente agnóstico (Claude/DeepSeek)
@@ -28,10 +85,18 @@ taller-ia/
 ├── mcp-servers/
 │   ├── notas-mcp.ts               # MCP Server con FastMCP
 │   └── utils-mcp.ts               # MCP Server con SDK oficial
+├── specs/
+│   ├── 001-devcontainer-setup/    # Feature: DevContainer Setup
+│   │   ├── spec.md                # Especificación
+│   │   ├── plan.md                # Plan de implementación
+│   │   ├── tasks.md               # Lista de tareas
+│   │   ├── research.md            # Investigación y decisiones
+│   │   └── quickstart.md          # Guía rápida para usuarios
+│   └── [otras-features]/
 ├── AGENTS.md                       # Guías de codificación para agentes IA
 ├── package.json
 ├── tsconfig.json
-├── .env.example
+├── .env.example                   # Plantilla de variables de entorno
 └── README.md
 ```
 
