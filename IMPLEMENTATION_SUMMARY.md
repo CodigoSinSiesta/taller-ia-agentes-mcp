@@ -267,6 +267,7 @@ Total Implementation: ~6-8 hours (5 commits)
 | MCP servers | Both start | ✅ Working |
 | Authentication | Both providers | ✅ Claude + DeepSeek |
 | API keys | Persist rebuilds | ✅ Mounting strategy |
+| OpenCode | Command available | ✅ Installed in DevContainer |
 | Documentation | Complete & clear | ✅ 1000+ lines |
 | Cross-platform | Win/Mac/Linux | ✅ All tested |
 | Constitution | 5/5 principles | ✅ 100% compliant |
