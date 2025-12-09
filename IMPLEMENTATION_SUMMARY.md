@@ -25,13 +25,14 @@
 
 ## 📦 Deliverables
 
-### Configuration Files (5 files)
+### Configuration Files (6 files)
 ```
-✅ .devcontainer/devcontainer.json       (Image: Node.js 20 TypeScript)
+✅ .devcontainer/devcontainer.json       (Image: Node.js 20 TypeScript - Optimized for Codespaces)
+✅ .devcontainer/README.md               (Workflow documentation for Codespaces/DevContainer)
 ✅ .vscode/settings.json                  (TypeScript strict, Prettier, etc.)
 ✅ .vscode/extensions.json                (ESLint, Prettier, Copilot, etc.)
-✅ .env.example                           (Updated with both providers)
-✅ README.md                              (Updated with features table)
+✅ .env.example                           (Updated with dual auth: GitHub Secrets + .env)
+✅ README.md                              (Codespaces-first quick start)
 ```
 
 ### Specification Documents (6 files)
@@ -82,12 +83,13 @@
 **Goal**: Secure, persistent API key handling across rebuilds
 
 **Delivered**:
-- .env file mounting from host
-- Automatic persistence without container storage
-- Clear documentation of 3 configuration options
+- **Dual authentication methods**: GitHub Secrets (Codespaces) + .env (local)
+- .env file mounting from host for DevContainer local
+- GitHub Secrets integration for Codespaces (encrypted, secure)
+- Clear documentation of both configuration methods
 - Security guarantees (keys not in image, git protected)
 - Recovery procedures for common errors
-- Detailed rebuild scenarios
+- Migration guides between methods
 
 **Validation**: ✅ Keys persist, switches work, security verified
 
@@ -152,7 +154,15 @@ npm run agente:tareas:claude
 npm run agente:tareas:deepseek
 ```
 
-### Secure Secret Management
+### Secure Secret Management - Dual Methods
+
+**GitHub Codespaces (Recommended):**
+```
+GitHub Secrets → Codespace → Environment Variables
+    (encrypted)    (secure)      (no disk writes)
+```
+
+**DevContainer Local (Alternative):**
 ```
 Host Machine          Container
     ↓                     ↓
@@ -185,7 +195,7 @@ Phase 4: User Story 2 Enhancement ... ✅ Complete
 Phase 5: User Story 3 Enhancement ... ✅ Complete
 Phase 6: Polish & Validation ........ ✅ Complete
 
-Total Implementation: ~6-8 hours (2-3 commits)
+Total Implementation: ~6-8 hours (4 commits)
 ```
 
 ---
@@ -229,6 +239,14 @@ Total Implementation: ~6-8 hours (2-3 commits)
 - Phase 5: API key management
 - Phase 6: Validation and polish
 - Comprehensive documentation
+
+**Commit 4** (0f1b47e): `feat: optimize for GitHub Codespaces with dual auth methods`
+- Remove problematic mounts from devcontainer.json
+- Add GitHub Secrets documentation in .env.example and quickstart.md
+- Update README.md with Codespaces-first approach
+- Add build/typecheck/clean scripts to package.json
+- Create .devcontainer/README.md with setup workflow
+- Update AGENTS.md with new commands and GitHub Secrets support
 
 ---
 
