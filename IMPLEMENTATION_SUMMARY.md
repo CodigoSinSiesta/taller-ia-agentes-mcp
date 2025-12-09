@@ -197,7 +197,7 @@ Phase 4: User Story 2 Enhancement ... ✅ Complete
 Phase 5: User Story 3 Enhancement ... ✅ Complete
 Phase 6: Polish & Validation ........ ✅ Complete
 
-Total Implementation: ~6-8 hours (5 commits)
+Total Implementation: ~6-8 hours (6 commits)
 ```
 
 ---
@@ -255,6 +255,11 @@ Total Implementation: ~6-8 hours (5 commits)
 - Update documentation to mention OpenCode availability
 - Add troubleshooting for opencode command not found
 - Update README and quickstart with OpenCode references
+
+**Commit 6** (841c395): `feat: add OpenCode VS Code extension (sst-dev.opencode)`
+- Add OpenCode extension to devcontainer.json extensions list
+- Update documentation to mention both CLI and VS Code extension
+- Update IMPLEMENTATION_SUMMARY.md with extension details
 
 ---
 
