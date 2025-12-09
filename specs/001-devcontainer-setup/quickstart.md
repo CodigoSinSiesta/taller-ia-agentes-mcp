@@ -148,13 +148,119 @@ npm run mcp:utils                # Servidor de Utilidades
 
 ---
 
-## 🔄 API Key Persistence
+## 🔄 API Key Persistence & Container Rebuilds
 
 Tu archivo `.env` está montado desde tu máquina host, así que tus claves persisten automáticamente entre reconstrucciones del contenedor.
+
+### ¿Qué pasa cuando reconstruyes el DevContainer?
+
+```
+Tu Máquina (Host)          Container              Resultado
+────────────────           ─────────            ──────────
+.env file                  [Old Container]
+(con tus claves)    ──────▶ [Stopped]           ✓ .env persiste
+                           [Deleted]
+                    
+                           [New Image Built]
+                           [New Container]
+                    ◀───── (mount .env)         ✓ Claves disponibles
+```
+
+**Resumen:**
+1. Reconstruyes el DevContainer → container se elimina
+2. Se construye uno nuevo
+3. .env se monta automáticamente desde tu máquina
+4. Tus claves están disponibles ✅
+5. **No necesitas reconfigurar nada**
+
+### Garantías de Seguridad
+
+✅ **Las claves NO están en la imagen Docker**
+  - Puedes compartir la imagen sin exponer secretos
+  - Puedes hacer push a un registro sin secretos
+
+✅ **Las claves NO se commitean a git**
+  - .env está en .gitignore
+  - git check-ignore .env debería mostrar ".env"
+
+✅ **Las claves NO aparecen en logs**
+  - Los agentes no imprimen claves
+  - Inspeccionar contenedor no revela secretos
+
+### Recuperación de Errores
+
+**"ANTHROPIC_API_KEY is not defined"**
+```bash
+# Solución 1: Crear .env desde ejemplo
+cp .env.example .env
+# Luego edita .env con tus claves reales
+
+# Solución 2: Verificar que .env existe en la raíz
+ls -la .env
+# Debe mostrar: -rw-r--r-- 1 user  group  ... .env
+```
+
+**Container rechaza montar .env**
+```bash
+# Verificar permisos
+chmod 644 .env
+
+# Verificar que está en el lugar correcto
+# Debe estar en: /path/to/taller-ia/.env
+# NO en: /path/to/.env.example o /path/to/specs/.env
+```
+
+---
+
+## 🤖 Usar OpenCode (GitHub Copilot) para Asistencia AI
+
+El DevContainer incluye soporte para **GitHub Copilot** (OpenCode integrado), que proporciona asistencia AI mientras trabajas con el código.
+
+### Instalar Copilot
+1. En VS Code (dentro del DevContainer)
+2. Extensiones → Busca "GitHub Copilot"
+3. Instala la extensión oficial de GitHub
+4. Autentica con tu cuenta GitHub
+
+### Usar Copilot
+Dentro del DevContainer, puedes:
+
+```typescript
+// Escribe un comentario y Copilot sugiere código
+// Función para procesar mensajes de agente
+function processMessage(message: string) {
+  // Copilot sugiere la implementación aquí
+}
+
+// O selecciona código y pregunta
+// Click derecho → "Ask Copilot" → "Explain this code"
+```
+
+### Preguntas Útiles para Aprender
+
+**Dentro del DevContainer con OpenCode/Copilot:**
+- "Explica cómo funciona el agente de tareas" → Entiende la arquitectura
+- "¿Cómo puedo crear un agente nuevo?" → Aprende el patrón
+- "¿Qué es un MCP server?" → Comprende Model Context Protocol
+- "Mejora este código" → Refactoring asistido
+- "¿Cuál es la mejor práctica aquí?" → Aprendizaje interactivo
+
+### Limitaciones
+- Requiere autenticación GitHub
+- Requiere conexión a internet
+- Algunas funciones requieren suscripción Copilot
+
+**Nota**: GitHub Copilot es opcional. Puedes aprender sin él, pero añade una capa de asistencia AI muy valiosa.
 
 ---
 
 ## ✨ ¡Listo!
 
-Ya tienes tu entorno completamente configurado. Puedes ejecutar agentes IA y servidores MCP sin problemas adicionales.
+Ya tienes tu entorno completamente configurado. Puedes:
+- ✅ Ejecutar agentes IA
+- ✅ Iniciar servidores MCP
+- ✅ Usar GitHub Copilot para asistencia
+- ✅ Cambiar entre Claude y DeepSeek
+
+¡El taller puede comenzar!
 

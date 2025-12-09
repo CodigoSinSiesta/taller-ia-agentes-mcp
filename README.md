@@ -143,6 +143,40 @@ El archivo `AGENTS.md` contiene las reglas de codificación específicas para ag
 
 ---
 
+## ✨ Características del DevContainer
+
+### 🔐 Multi-Proveedor LLM
+- ✅ **Claude (Anthropic)** - Muy preciso y robusto
+- ✅ **DeepSeek** - Económico y eficiente
+- ✅ Cambiar entre ellos sin reconfiguración: `export LLM_PROVIDER=deepseek`
+
+### 🚀 Setup Ultra-Rápido
+- ✅ Sin instalaciones previas (solo Docker + VS Code)
+- ✅ 5-10 minutos para tener entorno funcional
+- ✅ Reconstrucciones rápidas (< 3 minutos, cached)
+
+### 🔒 Seguridad Incorporada
+- ✅ API keys en `.env` nunca en imagen Docker
+- ✅ Persistencia automática entre rebuilds
+- ✅ Protección `.gitignore` para evitar commits accidentales
+
+### 🎓 Asistencia AI
+- ✅ GitHub Copilot integrado (opcional)
+- ✅ Asistencia mientras escribes código
+- ✅ Explicación de agentes y MCP servers
+
+### 📚 Documentación Completa
+- 📖 Guía rápida en español (quickstart.md)
+- 🔧 Troubleshooting con 15+ soluciones
+- ✅ Validación y testing guide
+
+### 🌐 Cross-Platform
+- ✅ Windows + PowerShell / Git Bash
+- ✅ macOS (Intel y Apple Silicon)
+- ✅ Linux (cualquier distribución)
+
+---
+
 ## 🤖 Agentes
 
 ### ¿Qué es un Agente?

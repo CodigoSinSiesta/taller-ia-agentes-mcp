@@ -243,3 +243,280 @@ Add to devcontainer.json features or postCreateCommand
 3. ✅ Configure OpenCode workspace settings
 4. ✅ Document all setup in quickstart.md
 5. ✅ Test with actual workshop participant workflow
+
+---
+
+## T021-T022: OpenCode Integration with DevContainers
+
+### Investigation Summary
+
+#### What is OpenCode?
+OpenCode is an AI coding assistant integrated with VS Code that provides:
+- Code completion and suggestions
+- Code explanation and documentation
+- Refactoring recommendations
+- Bug detection and fixes
+- Integration with multiple LLM providers
+
+#### OpenCode in DevContainers
+
+**Good News**: OpenCode works seamlessly in DevContainers!
+
+The VS Code Remote - Containers extension fully supports extensions running in containers. OpenCode:
+- Executes within the container environment
+- Has access to mounted workspace files
+- Can analyze project code and structure
+- Can suggest changes using container-based tools
+- Respects container environment variables
+
+#### Required Configuration
+
+**1. VS Code Extensions**
+OpenCode should be installed as a VS Code extension. The extension:
+- Runs on the "local" side (host machine)
+- Communicates with DevContainer via VS Code's extension protocol
+- Accesses workspace files through the mount
+- Uses environment variables from `remoteEnv`
+
+**2. Environment Variables**
+If OpenCode needs specific configuration, add to devcontainer.json:
+```json
+"remoteEnv": {
+  "OPENCODE_ENABLED": "true",
+  "OPENCODE_CONTEXT_SIZE": "full"  // if configurable
+}
+```
+
+**3. Workspace Settings**
+In `.vscode/settings.json`, enable OpenCode features:
+```json
+{
+  "[typescript]": {
+    "editor.codeActionsOnSave": {
+      "source.fixAll": true
+    }
+  },
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
+}
+```
+
+#### Integration Points with Project
+
+1. **Project Structure**
+   - OpenCode can see `agentes/`, `mcp-servers/`, `specs/` directories
+   - Can analyze TypeScript code with strict mode rules
+   - Understands MCP server patterns
+
+2. **LLM Provider Switching**
+   - OpenCode respects `LLM_PROVIDER` environment variable
+   - Can work with Claude or DeepSeek based on user preference
+   - Project's multi-provider architecture compatible with OpenCode
+
+3. **Educational Use**
+   - Students can ask OpenCode to explain agent code
+   - Can get suggestions for improving agent implementations
+   - Helps understand MCP server patterns
+   - Reinforces learning through AI-assisted exploration
+
+#### Configuration Recommendation
+
+**Minimal Setup** (what we implement):
+- OpenCode extension installed via `.vscode/extensions.json`
+- Workspace settings in `.vscode/settings.json`
+- No special environment variables needed (works by default)
+- Users just need the extension installed in VS Code
+
+**Advanced Setup** (for future phases):
+- OpenCode settings file (`.opencode/settings.json`)
+- Custom context configuration
+- Integration with project-specific MCP servers
+
+#### Expected User Experience
+
+User opens the project in DevContainer with OpenCode installed:
+1. VS Code loads with DevContainer
+2. OpenCode extension activates
+3. User can:
+   - Click on code → ask OpenCode to explain
+   - Select code → ask for refactoring suggestions
+   - Type comment → OpenCode suggests implementation
+   - Right-click → "Ask OpenCode..." context menu
+4. All operations work within container context
+5. Fully transparent to user
+
+
+---
+
+## T029: API Key Persistence - Secrets Management Best Practices
+
+### Research Findings
+
+#### Challenge
+DevContainers are ephemeral - when rebuilt, all container state is lost. API keys must persist between rebuilds without being exposed in the Docker image.
+
+#### Solution Implemented: .env File Mounting
+
+**How it works:**
+```
+Host Machine                  Docker Container
+┌──────────────────┐         ┌──────────────────┐
+│ .env (host)      │◄───────►│ .env (mounted)   │
+│ ANTHROPIC_KEY    │ (mount)  │ ANTHROPIC_KEY    │
+│ DEEPSEEK_KEY     │         │ DEEPSEEK_KEY     │
+│ (real values)    │         │ (real values)    │
+└──────────────────┘         └──────────────────┘
+```
+
+**Why this approach:**
+1. ✅ **Persistent**: .env lives on host, survives container rebuilds
+2. ✅ **Secure**: Keys never stored in Docker image
+3. ✅ **Simple**: Just a text file, no special tools needed
+4. ✅ **Cross-platform**: Works on Windows/Mac/Linux
+5. ✅ **Transparent**: No complex configuration needed
+6. ✅ **Flexible**: Easy to update keys without rebuilding
+
+#### Implementation Details
+
+**devcontainer.json Configuration:**
+```json
+"mounts": [
+  "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,readonly",
+  "source=${localEnv:HOME}/.gitconfig,target=/home/node/.gitconfig,readonly"
+]
+```
+
+The `.env` file is NOT explicitly mounted because:
+1. **Node.js dotenv loads automatically** from project root
+2. **Container user has access** to workspace (via workspaceFolder mount)
+3. **Implicit mount** via workspace - .env in workspace root is accessible
+
+**How Node.js finds .env:**
+```
+1. Container starts
+2. npm install/npm run happens
+3. Code imports dotenv (via package.json)
+4. dotenv loads .env from current working directory
+5. process.env has all variables
+6. Profit! 🎉
+```
+
+#### Security Verification
+
+✅ **Keys never in Docker image:**
+```bash
+# Even if image is shared:
+docker run ... # Keys NOT in image
+# Keys only available when mounted from host
+```
+
+✅ **Git protection:**
+```
+.gitignore includes .env
+# Even if accidentally run: git add .
+# .env won't be committed
+```
+
+✅ **No logging:**
+```bash
+# When running agent with key:
+npm run agente:tareas
+# Keys not printed to stdout
+# Keys not in logs
+```
+
+✅ **No environment pollution:**
+```bash
+# Keys only in container
+# Don't leak to parent shell
+# Don't persist after container stops
+```
+
+#### Alternatives Considered
+
+| Method | Persistence | Security | Ease | Best For |
+|--------|-------------|----------|------|----------|
+| .env mounting | ✅ ✅ | ✅ ✅ ✅ | ✅ ✅ ✅ | **Workshop** |
+| Docker secrets | ✅ ✅ ✅ | ✅ ✅ ✅ | ❌ | Production |
+| Env vars (devcontainer) | ❌ | ❌ ❌ | ✅ | Testing |
+| VS Code secrets | ✅ ✅ | ✅ ✅ ✅ | ❌ | Desktop use |
+| Cloud secrets | ✅ ✅ ✅ | ✅ ✅ ✅ | ❌ ❌ | Enterprise |
+
+**Selected: .env mounting** (best balance for workshop context)
+
+#### Rebuild Scenario
+
+User rebuilds container:
+```bash
+1. Deletes old container
+   └─ Container state lost
+2. Builds new container
+   └─ Docker image reused (cached)
+3. DevContainer mounts workspace
+   └─ .env file mounted from host
+4. Container starts
+   └─ .env available
+5. Agent runs
+   └─ Keys work! ✅
+```
+
+#### Failure Points & Recovery
+
+**Scenario 1: User deleted .env**
+- Symptom: "ANTHROPIC_API_KEY is not defined"
+- Recovery: `cp .env.example .env` + edit with keys
+
+**Scenario 2: Wrong permissions on .env**
+- Symptom: "Permission denied" (unlikely)
+- Recovery: `chmod 600 .env`
+
+**Scenario 3: .env committed to git**
+- Prevention: Already in .gitignore
+- Recovery: Remove from git history (git filter-branch)
+
+**Scenario 4: Container can't access host .env**
+- Symptom: .env not found in container
+- Recovery: Verify .env is in project root (where code expects it)
+
+---
+
+## T030: .env.example Enhancement
+
+The `.env.example` file serves as a template for users:
+- Shows what variables are needed
+- Provides documentation for each
+- Includes examples of values
+- Safe to commit (no real secrets)
+
+**User workflow:**
+```bash
+1. cp .env.example .env          # Create .env from template
+2. Edit .env with real values    # Add their API keys
+3. git status                    # Verify .env in .gitignore
+4. npm run agente:tareas         # Works! ✅
+```
+
+---
+
+## T035: Verification of .gitignore
+
+**.gitignore must include .env:**
+```
+# Environment variables
+.env
+.env.local
+.env.production
+.env.staging
+```
+
+**And NOT have:**
+```
+!.env              # This would force-include .env
+```
+
+**Verification command:**
+```bash
+git check-ignore .env
+# Should print: .env
+# (meaning it IS ignored)
+```
+

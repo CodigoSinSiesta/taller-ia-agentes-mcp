@@ -36,7 +36,8 @@
         "dbaeumer.vscode-eslint",
         "esbenp.prettier-vscode",
         "ms-vscode.vscode-typescript-next",
-        "GitHub.Copilot"
+        "GitHub.Copilot",
+        "GitHub.Copilot-Chat"
       ],
       "settings": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",
