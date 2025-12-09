@@ -3,7 +3,8 @@
 Ejemplos prácticos para entender cómo funcionan los **Agentes de IA** y los **MCP Servers** (Model Context Protocol).
 
 ✅ **Compatible con Claude y DeepSeek**  
-✅ **DevContainer Incluido** - Entorno preconfigurado en Docker
+✅ **DevContainer Incluido** - Entorno preconfigurado en Docker  
+✅ **OpenCode incluido** - Agente AI de línea de comandos
 
 ---
 

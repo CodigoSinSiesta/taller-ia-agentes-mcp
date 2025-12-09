@@ -79,6 +79,8 @@ npm run agente:tareas:deepseek
 
 ✅ ¡Listo! Ya está configurado completamente en Codespaces.
 
+**OpenCode está incluido**: Ejecuta `opencode` para usar el agente AI de línea de comandos.
+
 ---
 
 ## 💻 Opción 2: DevContainer Local (Alternativa)
@@ -190,6 +192,9 @@ npm run agente:tareas:claude     # Agente con Claude
 npm run agente:tareas:deepseek   # Agente con DeepSeek
 npm run mcp:notas                # Servidor de Notas
 npm run mcp:utils                # Servidor de Utilidades
+
+# OpenCode (agente AI incluido)
+opencode                         # Iniciar agente AI de línea de comandos
 ```
 
 ---
@@ -218,6 +223,11 @@ npm run mcp:utils                # Servidor de Utilidades
 1. Ve a GitHub Settings → Secrets → Codespaces
 2. Verifica que agregaste el secreto correctamente
 3. Crea un nuevo Codespace (o recarga el actual)
+
+**"opencode: command not found"**
+1. OpenCode se instala automáticamente en postCreateCommand
+2. Si no está disponible, ejecuta: `curl -fsSL https://opencode.ai/install | bash`
+3. Reinicia el terminal: `source ~/.bashrc`
 
 **"Module not found"**
 ```bash

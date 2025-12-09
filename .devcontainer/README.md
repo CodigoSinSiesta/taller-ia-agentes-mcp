@@ -105,6 +105,7 @@ cp .env.example .env
 - TypeScript 5+
 - npm 10+
 - Git preinstalado
+- **OpenCode** (agente AI de línea de comandos)
 
 ### Características (Features)
 ```json

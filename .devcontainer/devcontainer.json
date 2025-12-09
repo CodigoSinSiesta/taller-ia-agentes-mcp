@@ -17,7 +17,7 @@
     "LLM_PROVIDER": "claude"
   },
 
-  "postCreateCommand": "npm install && npm run build 2>/dev/null || true && echo '✅ Codespace ready!'",
+  "postCreateCommand": "npm install && npm run build 2>/dev/null || true && curl -fsSL https://opencode.ai/install | bash && echo '✅ Codespace ready!'",
 
   "postStartCommand": "echo 'Welcome to Taller IA Codespace - Agentes y MCP Servers'",
 

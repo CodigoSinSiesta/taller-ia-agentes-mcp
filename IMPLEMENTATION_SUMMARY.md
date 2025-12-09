@@ -59,6 +59,7 @@
 
 **Delivered**:
 - DevContainer with Node.js 20 + npm + TypeScript + git
+- **OpenCode** (open source AI coding agent) pre-installed
 - Pre-configured VS Code extensions
 - Spanish locale support
 - Both Claude and DeepSeek support
