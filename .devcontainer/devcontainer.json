@@ -30,7 +30,8 @@
         "esbenp.prettier-vscode",
         "ms-vscode.vscode-typescript-next",
         "GitHub.Copilot",
-        "GitHub.Copilot-Chat"
+        "GitHub.Copilot-Chat",
+        "sst-dev.opencode"
       ],
       "settings": {
         "editor.defaultFormatter": "esbenp.prettier-vscode",

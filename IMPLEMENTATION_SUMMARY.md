@@ -59,7 +59,8 @@
 
 **Delivered**:
 - DevContainer with Node.js 20 + npm + TypeScript + git
-- **OpenCode** (open source AI coding agent) pre-installed
+- **OpenCode CLI** (open source AI coding agent) pre-installed
+- **OpenCode VS Code Extension** (sst-dev.opencode) included
 - Pre-configured VS Code extensions
 - Spanish locale support
 - Both Claude and DeepSeek support
@@ -267,7 +268,7 @@ Total Implementation: ~6-8 hours (5 commits)
 | MCP servers | Both start | ✅ Working |
 | Authentication | Both providers | ✅ Claude + DeepSeek |
 | API keys | Persist rebuilds | ✅ Mounting strategy |
-| OpenCode | Command available | ✅ Installed in DevContainer |
+| OpenCode | CLI + VS Code Extension | ✅ Both installed in DevContainer |
 | Documentation | Complete & clear | ✅ 1000+ lines |
 | Cross-platform | Win/Mac/Linux | ✅ All tested |
 | Constitution | 5/5 principles | ✅ 100% compliant |
