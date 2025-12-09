@@ -1,38 +1,87 @@
-# Guía Rápida: Configuración del DevContainer
+# Guía Rápida: Configuración del Entorno
 
-**Objetivo**: Configurar tu entorno de desarrollo para el Taller IA en menos de 10 minutos.
-
----
-
-## 📋 Prerequisitos
-
-Antes de empezar, asegúrate de tener instalado:
-
-### Requerimientos Obligatorios
-
-1. **Docker Desktop** (Windows, macOS, o Linux)
-   - [Descargar Docker Desktop](https://www.docker.com/products/docker-desktop)
-   - Versión mínima: 4.0.0
-   - Verifica: `docker --version`
-
-2. **Visual Studio Code**
-   - [Descargar VS Code](https://code.visualstudio.com/)
-   - Versión mínima: 1.88.0
-
-3. **Extensión: Dev Containers**
-   - Abre VS Code
-   - Presiona `Ctrl+Shift+X` (o `Cmd+Shift+X` en Mac)
-   - Busca "Dev Containers"
-   - Instala la extensión oficial de Microsoft
-
-### Requerimientos Opcionales
-
-- **Git** (para clonar el repositorio)
-- **API Keys válidas** para Claude y/o DeepSeek
+**Objetivo**: Configurar tu entorno de desarrollo para el Taller IA en menos de 10 minutos usando **GitHub Codespaces**.
 
 ---
 
-## 🚀 Comenzar (5 minutos)
+## 🎯 Dos Opciones: Elige la tuya
+
+### ✅ Opción Recomendada: GitHub Codespaces (En la Nube)
+
+**Ventajas:**
+- 🌐 Funciona en cualquier navegador
+- ⚡ Sin instalaciones locales necesarias
+- 🔐 GitHub Secrets para API keys (más seguro)
+- 💻 Hardware potente en la nube
+- ✅ Exactamente lo que usaremos en el taller
+
+### 💻 Opción Alternativa: DevContainer Local
+
+**Requisitos:**
+- Docker Desktop instalado ([descargar](https://www.docker.com/products/docker-desktop))
+- VS Code instalado ([descargar](https://code.visualstudio.com/))
+- Extensión Dev Containers
+
+**Nota:** En el taller usaremos GitHub Codespaces, pero esta opción también funciona.
+
+---
+
+## 🌐 Opción 1: GitHub Codespaces (Recomendado)
+
+### Paso 1: Crear Codespace
+
+1. Ve a tu repositorio en GitHub
+2. Haz clic en el botón verde **Code**
+3. Selecciona la pestaña **Codespaces**
+4. Haz clic en **Create codespace on main**
+
+⏳ Espera 2-3 minutos a que se construya. VS Code Online se abrirá automáticamente.
+
+### Paso 2: Configurar GitHub Secrets (API Keys)
+
+Para que tus API keys estén disponibles en Codespaces:
+
+1. **En GitHub** (en tu navegador):
+   - Ve a: `Settings` → `Secrets and variables` → `Codespaces`
+   - Haz clic en **New repository secret**
+   - Añade tus secretos:
+
+   **Para Claude:**
+   ```
+   Name: ANTHROPIC_API_KEY
+   Value: sk-ant-tu-clave-real
+   ```
+
+   **Para DeepSeek:**
+   ```
+   Name: DEEPSEEK_API_KEY
+   Value: sk-tu-clave-real
+   ```
+
+   **Para elegir proveedor (opcional):**
+   ```
+   Name: LLM_PROVIDER
+   Value: claude
+   ```
+
+2. **En Codespaces** (en VS Code Online):
+   - Las variables se cargarán automáticamente
+   - No necesitas crear `.env` para Codespaces
+
+### Paso 3: Verificar que Funciona
+
+```bash
+# En la terminal de Codespaces
+npm run agente:tareas:claude
+# O con DeepSeek
+npm run agente:tareas:deepseek
+```
+
+✅ ¡Listo! Ya está configurado completamente en Codespaces.
+
+---
+
+## 💻 Opción 2: DevContainer Local (Alternativa)
 
 ### Paso 1: Clonar el Repositorio
 
@@ -57,31 +106,43 @@ Verás una notificación en la esquina inferior derecha sugiriendo "Reopen in Co
 
 ---
 
-## 🔑 Configurar API Keys
+## 🔑 Configurar API Keys (Paso 5)
 
-Tienes **3 opciones** para configurar el proveedor LLM. Crea un archivo `.env` en la raíz del proyecto:
+### Si estás en Codespaces:
+Ya configuraste GitHub Secrets en Pasos 2. **¡No necesitas hacer nada más!**
+Las variables se cargan automáticamente en Codespaces.
 
-### Opción 1: Usar Claude (recomendado para empezar)
+### Si estás usando DevContainer Local:
+
+Crea un archivo `.env` en la raíz del proyecto:
 
 ```bash
-ANTHROPIC_API_KEY="sk-ant-tu-clave-aqui"
+cp .env.example .env
+```
+
+Edita `.env` con tus claves:
+
+#### Opción A: Usar Claude (recomendado para empezar)
+
+```bash
+ANTHROPIC_API_KEY="sk-ant-tu-clave-real"
 LLM_PROVIDER="claude"
 ```
 Obtén tu clave: [console.anthropic.com](https://console.anthropic.com)
 
-### Opción 2: Usar DeepSeek (más económico - ¡también completamente soportado!)
+#### Opción B: Usar DeepSeek (más económico)
 
 ```bash
-DEEPSEEK_API_KEY="sk-tu-clave-aqui"
+DEEPSEEK_API_KEY="sk-tu-clave-real"
 LLM_PROVIDER="deepseek"
 ```
 Obtén tu clave: [platform.deepseek.com](https://platform.deepseek.com)
 
-### Opción 3: Tener ambos configurados (cambiar entre ellos)
+#### Opción C: Tener ambos configurados
 
 ```bash
-ANTHROPIC_API_KEY="sk-ant-tu-clave-aqui"
-DEEPSEEK_API_KEY="sk-tu-clave-aqui"
+ANTHROPIC_API_KEY="sk-ant-tu-clave-real"
+DEEPSEEK_API_KEY="sk-tu-clave-real"
 LLM_PROVIDER="claude"  # Por defecto usa Claude
 ```
 
@@ -99,6 +160,8 @@ npm run agente:tareas
 ---
 
 ## ✅ Verificar que Todo Funciona
+
+En **Codespaces** o **DevContainer Local**, ejecuta:
 
 ```bash
 # Verifica versiones
@@ -118,23 +181,6 @@ npm run mcp:notas
 
 ---
 
-## 🐛 Troubleshooting
-
-**Error: Cannot find Docker**
-- Docker Desktop no está ejecutándose. Abrelo desde Aplicaciones.
-
-**Error: ANTHROPIC_API_KEY not defined**
-- Verifica que `.env` existe y contiene tus claves
-- Reinicia el terminal de VS Code
-
-**Error: Module not found**
-```bash
-npm install
-npm run build
-```
-
----
-
 ## 🎓 Comandos Útiles
 
 ```bash
@@ -148,67 +194,73 @@ npm run mcp:utils                # Servidor de Utilidades
 
 ---
 
-## 🔄 API Key Persistence & Container Rebuilds
+## 🔄 Persistencia de API Keys
 
-Tu archivo `.env` está montado desde tu máquina host, así que tus claves persisten automáticamente entre reconstrucciones del contenedor.
+### En GitHub Codespaces:
+- GitHub Secrets se cargan automáticamente en cada Codespace
+- Son **encriptadas** en los servidores de GitHub
+- **No se escriben en disco** en el Codespace
+- Cambios en GitHub Secrets → nuevos Codespaces los tienen
 
-### ¿Qué pasa cuando reconstruyes el DevContainer?
+### En DevContainer Local:
+- Tu archivo `.env` está montado desde tu máquina host
+- Persiste entre reconstrucciones del contenedor
+- **Las claves NO se commitean a git** (`.env` está en `.gitignore`)
+- **Las claves NO aparecen en logs**
 
-```
-Tu Máquina (Host)          Container              Resultado
-────────────────           ─────────            ──────────
-.env file                  [Old Container]
-(con tus claves)    ──────▶ [Stopped]           ✓ .env persiste
-                           [Deleted]
-                    
-                           [New Image Built]
-                           [New Container]
-                    ◀───── (mount .env)         ✓ Claves disponibles
-```
+---
 
-**Resumen:**
-1. Reconstruyes el DevContainer → container se elimina
-2. Se construye uno nuevo
-3. .env se monta automáticamente desde tu máquina
-4. Tus claves están disponibles ✅
-5. **No necesitas reconfigurar nada**
+## 🐛 Troubleshooting
 
-### Garantías de Seguridad
+### Para GitHub Codespaces:
 
-✅ **Las claves NO están en la imagen Docker**
-  - Puedes compartir la imagen sin exponer secretos
-  - Puedes hacer push a un registro sin secretos
+**"ANTHROPIC_API_KEY not defined"**
+1. Ve a GitHub Settings → Secrets → Codespaces
+2. Verifica que agregaste el secreto correctamente
+3. Crea un nuevo Codespace (o recarga el actual)
 
-✅ **Las claves NO se commitean a git**
-  - .env está en .gitignore
-  - git check-ignore .env debería mostrar ".env"
-
-✅ **Las claves NO aparecen en logs**
-  - Los agentes no imprimen claves
-  - Inspeccionar contenedor no revela secretos
-
-### Recuperación de Errores
-
-**"ANTHROPIC_API_KEY is not defined"**
+**"Module not found"**
 ```bash
-# Solución 1: Crear .env desde ejemplo
-cp .env.example .env
-# Luego edita .env con tus claves reales
-
-# Solución 2: Verificar que .env existe en la raíz
-ls -la .env
-# Debe mostrar: -rw-r--r-- 1 user  group  ... .env
+npm install
+npm run build
 ```
 
-**Container rechaza montar .env**
+### Para DevContainer Local:
+
+**"Cannot find Docker"**
+- Docker Desktop no está ejecutándose. Abrelo desde Aplicaciones.
+
+**"ANTHROPIC_API_KEY not defined"**
+- Verifica que `.env` existe en la raíz
+- El archivo debe estar en: `/path/to/taller-ia/.env`
+- NO en: `/path/to/.env.example` o `/path/to/specs/.env`
+- Reinicia el terminal de VS Code
+
+**"Container rechaza montar .env"**
 ```bash
 # Verificar permisos
 chmod 644 .env
 
-# Verificar que está en el lugar correcto
-# Debe estar en: /path/to/taller-ia/.env
-# NO en: /path/to/.env.example o /path/to/specs/.env
+# Verificar ubicación
+ls -la .env
+# Debe mostrar: -rw-r--r-- 1 user  group  ... .env
 ```
+
+---
+
+## 🔐 Garantías de Seguridad
+
+✅ **Las claves NO están en la imagen Docker**
+  - La imagen es reutilizable sin exponer secretos
+
+✅ **Las claves NO se commitean a git**
+  - `.env` está en `.gitignore`
+
+✅ **En Codespaces, GitHub maneja encriptación**
+  - Secrets se guardan de forma segura en servidores GitHub
+
+✅ **Las claves NO aparecen en logs**
+  - Los agentes no imprimen valores sensibles
 
 ---
 

@@ -7,12 +7,46 @@ Ejemplos prácticos para entender cómo funcionan los **Agentes de IA** y los **
 
 ---
 
-## 🐳 Inicio Rápido con DevContainer (Recomendado)
+## 🌐 Inicio Rápido con GitHub Codespaces (Recomendado)
 
-### Prerequisitos Mínimos
-- **Docker Desktop** instalado ([descargar](https://www.docker.com/products/docker-desktop))
-- **VS Code** instalado ([descargar](https://code.visualstudio.com/))
-- **Extensión Dev Containers** (instala desde VS Code)
+**Para el taller usaremos GitHub Codespaces.** Funciona en cualquier navegador, sin instalaciones locales.
+
+### Setup en Codespaces (3 minutos)
+
+1. **Crear Codespace:**
+   - Ve a tu repositorio en GitHub
+   - Haz clic en el botón verde **Code** → pestaña **Codespaces**
+   - Haz clic en **Create codespace on main**
+
+2. **Configurar GitHub Secrets (API Keys):**
+   - En GitHub: `Settings` → `Secrets and variables` → `Codespaces`
+   - Añade estos Secrets con tus claves reales:
+     - `ANTHROPIC_API_KEY` (para Claude)
+     - `DEEPSEEK_API_KEY` (para DeepSeek)
+     - `LLM_PROVIDER` (opcional, "claude" o "deepseek")
+
+3. **En el Codespace (VS Code Online):**
+   ```bash
+   # Verifica que todo funciona
+   npm run agente:tareas:claude
+   # O con DeepSeek
+   npm run agente:tareas:deepseek
+   ```
+
+✅ **¡Listo!** El entorno está completamente configurado en Codespaces.
+
+📖 **Documentación completa**: Ver [`specs/001-devcontainer-setup/quickstart.md`](./specs/001-devcontainer-setup/quickstart.md)
+
+---
+
+## 🐳 Alternativa: DevContainer Local
+
+Si prefieres desarrollo local (requiere Docker):
+
+### Prerequisitos
+- **Docker Desktop** ([descargar](https://www.docker.com/products/docker-desktop))
+- **VS Code** ([descargar](https://code.visualstudio.com/))
+- **Extensión Dev Containers**
 
 ### Setup (5 minutos)
 
@@ -25,37 +59,45 @@ cd taller-ia
 code .
 
 # 3. VS Code sugerirá abrir en DevContainer → Haz clic en "Reopen in Container"
-# Las dependencias se instalarán automáticamente
 
 # 4. Configurar API keys (crear archivo .env en raíz)
 cp .env.example .env
-# Edita .env con tus claves de Anthropic y/o DeepSeek
+# Edita .env con tus claves
 
 # 5. ¡Listo! Prueba un agente
 npm run agente:tareas:claude
-# O con DeepSeek (igualmente soportado):
-npm run agente:tareas:deepseek
 ```
-
-📖 **Documentación completa**: Ver [`specs/001-devcontainer-setup/quickstart.md`](./specs/001-devcontainer-setup/quickstart.md)
 
 ---
 
-## 📦 Instalación Manual (sin DevContainer)
+## 📦 Instalación Manual (para usuarios avanzados)
 
-Si prefieres NO usar DevContainer:
+**Nota:** Para el taller usaremos GitHub Codespaces. Esta instalación manual es solo si quieres ejecutar localmente sin Docker.
+
+### Requisitos
+- **Node.js 20+** (`node --version`)
+- **npm 10+** (`npm --version`)
+- **TypeScript 5+** (`tsc --version`)
+
+### Instalación
 
 ```bash
-# Requisitos: Node.js 20+, npm 10+
-node --version    # v20.x.x mínimo
-npm --version     # 10.x.x mínimo
+# 1. Clonar repositorio
+git clone https://github.com/[usuario]/taller-ia.git
+cd taller-ia
 
-# Instalar dependencias
+# 2. Instalar dependencias
 npm install
 
-# Configurar variables de entorno
+# 3. Configurar API keys
 cp .env.example .env
-# Edita .env con tus API keys
+# Edita .env con tus claves reales
+
+# 4. Compilar proyecto
+npm run build
+
+# 5. Probar agente
+npm run agente:tareas:claude
 ```
 
 ---

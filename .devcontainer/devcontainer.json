@@ -14,21 +14,14 @@
   },
 
   "remoteEnv": {
-    "LLM_PROVIDER": "${localEnv:LLM_PROVIDER:claude}"
+    "LLM_PROVIDER": "claude"
   },
 
-  "postCreateCommand": "npm install && npm run build 2>/dev/null || true && echo '✅ DevContainer ready!'",
+  "postCreateCommand": "npm install && npm run build 2>/dev/null || true && echo '✅ Codespace ready!'",
 
-  "postStartCommand": "echo 'Welcome to Taller IA DevContainer - Agentes y MCP Servers'",
+  "postStartCommand": "echo 'Welcome to Taller IA Codespace - Agentes y MCP Servers'",
 
   "forwardPorts": [],
-
-  "portsAttributes": {},
-
-  "mounts": [
-    "source=${localEnv:HOME}/.ssh,target=/home/node/.ssh,readonly",
-    "source=${localEnv:HOME}/.gitconfig,target=/home/node/.gitconfig,readonly"
-  ],
 
   "customizations": {
     "vscode": {
@@ -65,7 +58,5 @@
   },
 
   "remoteUser": "node",
-  "updateRemoteUserUID": false,
-
-  "workspaceFolder": "/workspaces/taller-ia"
+  "updateRemoteUserUID": false
 }
