@@ -196,7 +196,7 @@ Phase 4: User Story 2 Enhancement ... ✅ Complete
 Phase 5: User Story 3 Enhancement ... ✅ Complete
 Phase 6: Polish & Validation ........ ✅ Complete
 
-Total Implementation: ~6-8 hours (4 commits)
+Total Implementation: ~6-8 hours (5 commits)
 ```
 
 ---
@@ -248,6 +248,12 @@ Total Implementation: ~6-8 hours (4 commits)
 - Add build/typecheck/clean scripts to package.json
 - Create .devcontainer/README.md with setup workflow
 - Update AGENTS.md with new commands and GitHub Secrets support
+
+**Commit 5** (38a6c1e): `feat: add OpenCode installation to DevContainer`
+- Install OpenCode (open source AI coding agent) in postCreateCommand
+- Update documentation to mention OpenCode availability
+- Add troubleshooting for opencode command not found
+- Update README and quickstart with OpenCode references
 
 ---
 
