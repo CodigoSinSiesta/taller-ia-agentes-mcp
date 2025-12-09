@@ -33,6 +33,8 @@ cp .env.example .env
 
 # 5. ¡Listo! Prueba un agente
 npm run agente:tareas:claude
+# O con DeepSeek (igualmente soportado):
+npm run agente:tareas:deepseek
 ```
 
 📖 **Documentación completa**: Ver [`specs/001-devcontainer-setup/quickstart.md`](./specs/001-devcontainer-setup/quickstart.md)

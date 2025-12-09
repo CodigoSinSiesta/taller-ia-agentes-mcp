@@ -14,7 +14,7 @@
   },
 
   "remoteEnv": {
-    "LLM_PROVIDER": "claude"
+    "LLM_PROVIDER": "${localEnv:LLM_PROVIDER:claude}"
   },
 
   "postCreateCommand": "npm install && npm run build 2>/dev/null || true && echo '✅ DevContainer ready!'",

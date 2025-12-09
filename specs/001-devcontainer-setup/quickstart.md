@@ -59,17 +59,42 @@ Verás una notificación en la esquina inferior derecha sugiriendo "Reopen in Co
 
 ## 🔑 Configurar API Keys
 
-Crea un archivo `.env` en la raíz del proyecto:
+Tienes **3 opciones** para configurar el proveedor LLM. Crea un archivo `.env` en la raíz del proyecto:
+
+### Opción 1: Usar Claude (recomendado para empezar)
+
+```bash
+ANTHROPIC_API_KEY="sk-ant-tu-clave-aqui"
+LLM_PROVIDER="claude"
+```
+Obtén tu clave: [console.anthropic.com](https://console.anthropic.com)
+
+### Opción 2: Usar DeepSeek (más económico - ¡también completamente soportado!)
+
+```bash
+DEEPSEEK_API_KEY="sk-tu-clave-aqui"
+LLM_PROVIDER="deepseek"
+```
+Obtén tu clave: [platform.deepseek.com](https://platform.deepseek.com)
+
+### Opción 3: Tener ambos configurados (cambiar entre ellos)
 
 ```bash
 ANTHROPIC_API_KEY="sk-ant-tu-clave-aqui"
 DEEPSEEK_API_KEY="sk-tu-clave-aqui"
-LLM_PROVIDER="claude"
+LLM_PROVIDER="claude"  # Por defecto usa Claude
 ```
 
-Obtén tus claves:
-- Claude: [console.anthropic.com](https://console.anthropic.com)
-- DeepSeek: [platform.deepseek.com](https://platform.deepseek.com)
+**Cambiar entre proveedores en cualquier momento:**
+```bash
+# Cambiar a DeepSeek
+export LLM_PROVIDER=deepseek
+npm run agente:tareas
+
+# Volver a Claude
+export LLM_PROVIDER=claude
+npm run agente:tareas
+```
 
 ---
 
@@ -81,8 +106,11 @@ node --version
 npm --version
 tsc --version
 
-# Ejecuta un agente
+# Ejecuta un agente con Claude
 npm run agente:tareas:claude
+
+# O ejecuta con DeepSeek (si tienes configurada la clave)
+npm run agente:tareas:deepseek
 
 # Ejecuta MCP Server
 npm run mcp:notas
