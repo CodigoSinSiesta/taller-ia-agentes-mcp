@@ -1,12 +1,14 @@
 # AGENTS.md - Coding Guidelines for AI Agents
 
 ## Build/Lint/Test Commands
-- **Build**: `npx tsc` (compile TypeScript to ./dist)
+- **Build**: `npm run build` (compila TypeScript a ./dist) o `npx tsc`
+- **Type check**: `npm run typecheck` (verifica tipos sin compilar) o `tsc --noEmit`
+- **Clean**: `npm run clean` (elimina directorio dist)
 - **Run agents**: `npm run agente:tareas:claude`, `npm run agente:tareas:deepseek`, `npm run agente:investigador:claude`
 - **Run MCP servers**: `npm run mcp:notas`, `npm run mcp:utils`
 - **Test single agent**: `LLM_PROVIDER=deepseek npx tsx agentes/agente-tareas/index.ts`
 - **Test MCP integration**: `echo "test command" | npx tsx agentes/agente-tareas/index.ts`
-- **Lint**: No linter configured - add ESLint + Prettier for consistent formatting
+- **Lint**: No linter configurado - agregar ESLint + Prettier para formato consistente
 
 ## Code Style Guidelines
 - **Language**: TypeScript strict mode, ES2022 target, NodeNext modules, ES modules only
@@ -25,6 +27,6 @@
 - **Agents**: Tool-use loops with state management, timeout handling, MCP integration
 - **MCP servers**: @modelcontextprotocol/sdk with Zod validation (not FastMCP)
 - **Persistence**: JSON files in project root (notas.json), no databases
-- **Environment**: .env files for API keys, LLM_PROVIDER env var for provider selection
+- **Environment**: .env files for API keys (local), GitHub Secrets for Codespaces, LLM_PROVIDER env var for provider selection
 - **Security**: Never commit API keys or secrets to repository</content>
 <parameter name="filePath">AGENTS.md

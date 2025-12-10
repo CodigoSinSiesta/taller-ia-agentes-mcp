@@ -2,7 +2,104 @@
 
 Ejemplos prácticos para entender cómo funcionan los **Agentes de IA** y los **MCP Servers** (Model Context Protocol).
 
-✅ **Compatible con Claude y DeepSeek**
+✅ **Compatible con Claude y DeepSeek**  
+✅ **DevContainer Incluido** - Entorno preconfigurado en Docker  
+✅ **OpenCode incluido** - Agente AI de línea de comandos
+
+---
+
+## 🌐 Inicio Rápido con GitHub Codespaces (Recomendado)
+
+**Para el taller usaremos GitHub Codespaces.** Funciona en cualquier navegador, sin instalaciones locales.
+
+### Setup en Codespaces (3 minutos)
+
+1. **Crear Codespace:**
+   - Ve a tu repositorio en GitHub
+   - Haz clic en el botón verde **Code** → pestaña **Codespaces**
+   - Haz clic en **Create codespace on main**
+
+2. **Configurar GitHub Secrets (API Keys):**
+   - En GitHub: `Settings` → `Secrets and variables` → `Codespaces`
+   - Añade estos Secrets con tus claves reales:
+     - `ANTHROPIC_API_KEY` (para Claude)
+     - `DEEPSEEK_API_KEY` (para DeepSeek)
+     - `LLM_PROVIDER` (opcional, "claude" o "deepseek")
+
+3. **En el Codespace (VS Code Online):**
+   ```bash
+   # Verifica que todo funciona
+   npm run agente:tareas:claude
+   # O con DeepSeek
+   npm run agente:tareas:deepseek
+   ```
+
+✅ **¡Listo!** El entorno está completamente configurado en Codespaces.
+
+📖 **Documentación completa**: Ver [`specs/001-devcontainer-setup/quickstart.md`](./specs/001-devcontainer-setup/quickstart.md)
+
+---
+
+## 🐳 Alternativa: DevContainer Local
+
+Si prefieres desarrollo local (requiere Docker):
+
+### Prerequisitos
+- **Docker Desktop** ([descargar](https://www.docker.com/products/docker-desktop))
+- **VS Code** ([descargar](https://code.visualstudio.com/))
+- **Extensión Dev Containers**
+
+### Setup (5 minutos)
+
+```bash
+# 1. Clonar repositorio
+git clone https://github.com/[usuario]/taller-ia.git
+cd taller-ia
+
+# 2. Abrir en VS Code
+code .
+
+# 3. VS Code sugerirá abrir en DevContainer → Haz clic en "Reopen in Container"
+
+# 4. Configurar API keys (crear archivo .env en raíz)
+cp .env.example .env
+# Edita .env con tus claves
+
+# 5. ¡Listo! Prueba un agente
+npm run agente:tareas:claude
+```
+
+---
+
+## 📦 Instalación Manual (para usuarios avanzados)
+
+**Nota:** Para el taller usaremos GitHub Codespaces. Esta instalación manual es solo si quieres ejecutar localmente sin Docker.
+
+### Requisitos
+- **Node.js 20+** (`node --version`)
+- **npm 10+** (`npm --version`)
+- **TypeScript 5+** (`tsc --version`)
+
+### Instalación
+
+```bash
+# 1. Clonar repositorio
+git clone https://github.com/[usuario]/taller-ia.git
+cd taller-ia
+
+# 2. Instalar dependencias
+npm install
+
+# 3. Configurar API keys
+cp .env.example .env
+# Edita .env con tus claves reales
+
+# 4. Compilar proyecto
+npm run build
+
+# 5. Probar agente
+npm run agente:tareas:claude
+```
 
 ---
 
@@ -10,6 +107,11 @@ Ejemplos prácticos para entender cómo funcionan los **Agentes de IA** y los **
 
 ```
 taller-ia/
+├── .devcontainer/
+│   └── devcontainer.json          # Configuración del DevContainer
+├── .vscode/
+│   ├── settings.json              # Configuración de VS Code
+│   └── extensions.json            # Extensiones recomendadas
 ├── agentes/
 │   ├── shared/
 │   │   └── llm-client.ts          # Cliente agnóstico (Claude/DeepSeek)
@@ -28,10 +130,18 @@ taller-ia/
 ├── mcp-servers/
 │   ├── notas-mcp.ts               # MCP Server con FastMCP
 │   └── utils-mcp.ts               # MCP Server con SDK oficial
+├── specs/
+│   ├── 001-devcontainer-setup/    # Feature: DevContainer Setup
+│   │   ├── spec.md                # Especificación
+│   │   ├── plan.md                # Plan de implementación
+│   │   ├── tasks.md               # Lista de tareas
+│   │   ├── research.md            # Investigación y decisiones
+│   │   └── quickstart.md          # Guía rápida para usuarios
+│   └── [otras-features]/
 ├── AGENTS.md                       # Guías de codificación para agentes IA
 ├── package.json
 ├── tsconfig.json
-├── .env.example
+├── .env.example                   # Plantilla de variables de entorno
 └── README.md
 ```
 
@@ -73,6 +183,40 @@ El archivo `AGENTS.md` contiene las reglas de codificación específicas para ag
 - **Convenciones de nomenclatura** y formato
 
 **Importante**: Revisa `AGENTS.md` antes de contribuir código a agentes de IA.
+
+---
+
+## ✨ Características del DevContainer
+
+### 🔐 Multi-Proveedor LLM
+- ✅ **Claude (Anthropic)** - Muy preciso y robusto
+- ✅ **DeepSeek** - Económico y eficiente
+- ✅ Cambiar entre ellos sin reconfiguración: `export LLM_PROVIDER=deepseek`
+
+### 🚀 Setup Ultra-Rápido
+- ✅ Sin instalaciones previas (solo Docker + VS Code)
+- ✅ 5-10 minutos para tener entorno funcional
+- ✅ Reconstrucciones rápidas (< 3 minutos, cached)
+
+### 🔒 Seguridad Incorporada
+- ✅ API keys en `.env` nunca en imagen Docker
+- ✅ Persistencia automática entre rebuilds
+- ✅ Protección `.gitignore` para evitar commits accidentales
+
+### 🎓 Asistencia AI
+- ✅ GitHub Copilot integrado (opcional)
+- ✅ Asistencia mientras escribes código
+- ✅ Explicación de agentes y MCP servers
+
+### 📚 Documentación Completa
+- 📖 Guía rápida en español (quickstart.md)
+- 🔧 Troubleshooting con 15+ soluciones
+- ✅ Validación y testing guide
+
+### 🌐 Cross-Platform
+- ✅ Windows + PowerShell / Git Bash
+- ✅ macOS (Intel y Apple Silicon)
+- ✅ Linux (cualquier distribución)
 
 ---
 

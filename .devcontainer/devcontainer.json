@@ -1,0 +1,63 @@
+{
+  "name": "Taller IA: Agentes y MCP Servers",
+  "image": "mcr.microsoft.com/devcontainers/typescript-node:1-20-bookworm",
+  
+  "features": {
+    "ghcr.io/devcontainers/features/git:1": {},
+    "ghcr.io/devcontainers/features/github-cli:1": {}
+  },
+
+  "containerEnv": {
+    "LANG": "es_ES.UTF-8",
+    "LC_ALL": "es_ES.UTF-8",
+    "LC_CTYPE": "es_ES.UTF-8"
+  },
+
+  "remoteEnv": {
+    "LLM_PROVIDER": "claude"
+  },
+
+  "postCreateCommand": "npm install && npm run build 2>/dev/null || true && curl -fsSL https://opencode.ai/install | bash && echo '✅ Codespace ready!'",
+
+  "postStartCommand": "echo 'Welcome to Taller IA Codespace - Agentes y MCP Servers'",
+
+  "forwardPorts": [],
+
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "dbaeumer.vscode-eslint",
+        "esbenp.prettier-vscode",
+        "ms-vscode.vscode-typescript-next",
+        "GitHub.Copilot",
+        "GitHub.Copilot-Chat",
+        "sst-dev.opencode"
+      ],
+      "settings": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode",
+        "editor.formatOnSave": true,
+        "editor.tabSize": 2,
+        "editor.insertSpaces": true,
+        "[typescript]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "[json]": {
+          "editor.defaultFormatter": "esbenp.prettier-vscode"
+        },
+        "typescript.enablePromptUseWorkspaceTsdk": true,
+        "terminal.integrated.env.linux": {
+          "LANG": "es_ES.UTF-8"
+        },
+        "terminal.integrated.env.osx": {
+          "LANG": "es_ES.UTF-8"
+        },
+        "terminal.integrated.env.windows": {
+          "LANG": "es_ES.UTF-8"
+        }
+      }
+    }
+  },
+
+  "remoteUser": "node",
+  "updateRemoteUserUID": false
+}

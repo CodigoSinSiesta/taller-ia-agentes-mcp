@@ -11,7 +11,10 @@
     "agente:investigador:claude": "LLM_PROVIDER=claude tsx agentes/agente-investigador/index.ts",
     "agente:investigador:deepseek": "LLM_PROVIDER=deepseek tsx agentes/agente-investigador/index.ts",
     "mcp:notas": "tsx mcp-servers/notas-mcp.ts",
-    "mcp:utils": "tsx mcp-servers/utils-mcp.ts"
+    "mcp:utils": "tsx mcp-servers/utils-mcp.ts",
+    "build": "tsc",
+    "typecheck": "tsc --noEmit",
+    "clean": "rm -rf dist"
   },
   "dependencies": {
     "@anthropic-ai/sdk": "^0.52.0",
