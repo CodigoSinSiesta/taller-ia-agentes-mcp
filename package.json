@@ -12,6 +12,9 @@
     "agente:investigador:deepseek": "LLM_PROVIDER=deepseek tsx agentes/agente-investigador/index.ts",
     "mcp:notas": "tsx mcp-servers/notas-mcp.ts",
     "mcp:utils": "tsx mcp-servers/utils-mcp.ts",
+    "mcp:marcadores": "tsx mcp-servers/marcadores-mcp.ts",
+    "test": "vitest run",
+    "test:watch": "vitest",
     "build": "tsc",
     "typecheck": "tsc --noEmit",
     "clean": "rm -rf dist"
@@ -27,7 +30,8 @@
   "devDependencies": {
     "@types/node": "^22.0.0",
     "tsx": "^4.19.0",
-    "typescript": "^5.5.0"
+    "typescript": "^5.5.0",
+    "vitest": "^4.1.1"
   },
   "engines": {
     "node": ">=20.0.0"
