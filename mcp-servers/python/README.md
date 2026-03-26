@@ -5,10 +5,12 @@ Servidor MCP de gestión de marcadores usando Python FastMCP.
 ## Setup
 
 ```bash
-# Instalar dependencias
-pip install -e .
-# o con uv:
-uv pip install -e .
+# Crear entorno virtual e instalar dependencias (recomendado con uv)
+uv venv .venv
+uv pip install fastmcp pytest
+
+# Activar entorno
+source .venv/bin/activate
 ```
 
 ## Uso
@@ -19,6 +21,8 @@ python server.py
 
 # Ejecutar tests
 pytest test_server.py -v
+# o directamente con uv:
+.venv/bin/pytest test_server.py -v
 ```
 
 ## Herramientas disponibles

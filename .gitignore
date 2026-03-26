@@ -151,4 +151,4 @@ claude_desktop_config.json
 
 # Project specific files
 opencode.jsonc
-notas.json
+notas.json.venv/
