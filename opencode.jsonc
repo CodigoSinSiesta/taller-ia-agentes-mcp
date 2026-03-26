@@ -14,7 +14,7 @@
     // Prompts: organizar_marcadores
     "marcadores-python": {
       "type": "local",
-      "command": ["python3", "mcp-servers/python/server.py"],
+      "command": ["uv", "run", "--directory", "mcp-servers/python", "python", "server.py"],
       "enabled": true
     }
   }
