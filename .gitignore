@@ -150,5 +150,5 @@ Thumbs.db
 claude_desktop_config.json
 
 # Project specific files
-opencode.jsonc
+# opencode.jsonc - Now tracked in git (configuration file)
 notas.json.venv/

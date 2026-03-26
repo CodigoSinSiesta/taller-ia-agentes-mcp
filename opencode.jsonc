@@ -1,0 +1,21 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "mcp": {
+    // MCP 3: Bookmark Manager en TypeScript (SDK oficial)
+    // Herramientas: agregar_marcador, buscar_marcadores, listar_marcadores, eliminar_marcador, listar_categorias
+    "marcadores-ts": {
+      "type": "local",
+      "command": ["npx", "tsx", "mcp-servers/marcadores-mcp.ts"],
+      "enabled": true
+    },
+    // MCP 4: Bookmark Manager en Python FastMCP
+    // Herramientas: agregar_marcador, buscar_marcadores, eliminar_marcador
+    // Resources: marcadores://todos, marcadores://{id}
+    // Prompts: organizar_marcadores
+    "marcadores-python": {
+      "type": "local",
+      "command": ["python3", "mcp-servers/python/server.py"],
+      "enabled": true
+    }
+  }
+}
