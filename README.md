@@ -346,6 +346,77 @@ npm run mcp:utils
 | generar_password | Genera contraseñas seguras |
 | base64 | Codifica/decodifica Base64 |
 
+### MCP 3: Servidor de Marcadores (SDK Oficial)
+
+Gestor de marcadores usando el SDK oficial de MCP con TypeScript.
+
+```bash
+npm run mcp:marcadores
+```
+
+**Tools disponibles:**
+
+| Tool | Descripción |
+|------|-------------|
+| crear_marcador | Añade un marcador con URL, título y categoría |
+| buscar_marcadores | Busca marcadores por término |
+| eliminar_marcador | Elimina un marcador por ID |
+| listar_marcadores | Lista todos los marcadores |
+| listar_categorias | Lista categorías únicas con conteo |
+
+### MCP 4: Servidor de Marcadores (Python FastMCP)
+
+El mismo gestor de marcadores implementado con Python FastMCP — mucho menos código.
+
+```bash
+# Setup (primera vez)
+cd mcp-servers/python
+uv venv .venv && uv pip install fastmcp pytest
+source .venv/bin/activate
+
+# Iniciar servidor
+python server.py
+
+# Ejecutar tests
+.venv/bin/pytest test_server.py -v
+```
+
+**Tools disponibles:**
+
+| Tool | Descripción |
+|------|-------------|
+| agregar_marcador | Añade un marcador (url, titulo, categoria) |
+| buscar_marcadores | Busca marcadores por término |
+| eliminar_marcador | Elimina un marcador por ID |
+
+**Resources:**
+
+| Resource URI | Descripción |
+|-------------|-------------|
+| `marcadores://todos` | Lista todos los marcadores como JSON |
+| `marcadores://{id}` | Detalle de un marcador por ID |
+
+**Comparativa:**
+
+| Aspecto | SDK Oficial (TS) | FastMCP (Python) |
+|---------|-----------------|-----------------|
+| Líneas de código | ~150 | ~80 |
+| JSON Schema | Manual | Auto (type hints) |
+| Descripción tools | Manual | Docstrings |
+| Recomendado para | Producción | Prototipos/Aprendizaje |
+
+---
+
+## 🧪 Tests
+
+```bash
+# TypeScript (vitest)
+npm run test
+
+# Python (pytest)
+cd mcp-servers/python && .venv/bin/pytest test_server.py -v
+```
+
 ---
 
 ## ⚙️ Configurar MCPs en Claude Desktop
@@ -398,6 +469,7 @@ npm run mcp:utils
 | Documentación | Menos extensa | Documentación completa |
 | Flexibilidad | Básica | Alta |
 | Recomendado | Prototipos | Producción |
+| Ejemplos | Python FastMCP | SDK Oficial (TS) |
 
 ---
 
@@ -457,6 +529,7 @@ npm run mcp:utils
 3. **Crear un MCP server** que consulte una API real (ej: el tiempo)
 4. **Combinar ambos**: Un agente que use tu MCP server personalizado
 5. **Añadir un tercer proveedor** al llm-client.ts (ej: OpenAI, Mistral)
+6. **Comparar los dos servidores de marcadores**: Analiza las diferencias entre `marcadores-mcp.ts` y `mcp-servers/python/server.py`
 
 ---
 

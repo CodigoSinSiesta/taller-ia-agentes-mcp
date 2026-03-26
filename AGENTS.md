@@ -25,7 +25,8 @@
 - **Planning**: Always create plan files in project root and track progress when developing plans
 - **LLM clients**: Factory pattern with Claude/DeepSeek provider abstraction
 - **Agents**: Tool-use loops with state management, timeout handling, MCP integration
-- **MCP servers**: @modelcontextprotocol/sdk with Zod validation (not FastMCP)
+- **MCP servers (TypeScript)**: @modelcontextprotocol/sdk with Zod validation; MCP servers (Python): FastMCP (prefecthq/fastmcp) for workshop exercises
+- **Python exercises**: FastMCP single-file pattern, pytest for testing, uv for dependency management
 - **Persistence**: JSON files in project root (notas.json), no databases
 - **Environment**: .env files for API keys (local), GitHub Secrets for Codespaces, LLM_PROVIDER env var for provider selection
 - **Security**: Never commit API keys or secrets to repository</content>

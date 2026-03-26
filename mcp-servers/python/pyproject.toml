@@ -1,0 +1,13 @@
+[project]
+name = "marcadores-mcp-fastmcp"
+version = "1.0.0"
+description = "Gestor de Marcadores MCP usando FastMCP - Taller de IA"
+requires-python = ">=3.10"
+dependencies = [
+    "fastmcp>=1.0.0",
+    "pytest>=7.0.0",
+    "pytest-asyncio>=0.23.0",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
