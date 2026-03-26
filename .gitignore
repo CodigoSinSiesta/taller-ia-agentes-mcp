@@ -152,3 +152,11 @@ claude_desktop_config.json
 # Project specific files
 # opencode.jsonc - Now tracked in git (configuration file)
 notas.json.venv/
+
+# Python build artifacts
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.venv/
+uv.lock
